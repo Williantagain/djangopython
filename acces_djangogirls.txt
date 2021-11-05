@@ -1,8 +1,12 @@
-http://theneeds.pythonanywhere.com
+ici j'ai  recharger a temps mais j'ai fais une erreur sur l'email de confirmation de création du superuser pour pythonanywhere
+
+
+
+http://djangop.pythonanywhere.com
 
 =============================================== -----------------------------------------------------
-dossier : MVT1
-projet : THENEEDS
+dossier : djangogils
+projet : mysite
 Objet1 : blog
 
 
@@ -18,11 +22,21 @@ mails : williantagain@gmail.com
 -----------------------------------------------------------
 DEPOT GIT:
 
-$ git config --global user.name Williantagain
-$ git config --global user.email williantagain@gmail.com
+$ git init
+Initialized empty Git repository in ~/djangogirls/.git/
 
+ensuite tu créer un fichier appeller ".gitignore" dans le répertoire djangogirls et colle le code la (voir fin de ce fichier) a l'intérieur
+
+
+$ git config --global user.name "Your Name"             # ici cest Williantagain
+$ git config --global user.email  you@example.com        #ici cest williantagain@gmail.com
+$ git status                     #
+$ git add .                       #
+$ git commit -m "My Django Girls app, first commit"      #
+$ git remote add origin https://github.com/<your-github-username>/my-first-blog.git #
+$ git push -u origin master   #
 ----------------------------------
-GITHUB: 
+GITHUB: # on utilise toujours notre fidel compte GITHUB donc les mêmes coordonnées
 
 https://github.com/
 http://127.0.0.1:8000/admin/login/?next=/admin/
@@ -31,20 +45,20 @@ mdp : Tagerwill=11
 username : Williantagain
 
 
-site : https://github.com/Williantagain/MVT1.git
+site : https://github.com/Williantagain/djangopython.git
 
 …or create a new repository on the command line
-echo "# MVT1" >> README.md
+echo "# djangopython" >> README.md
 git init
 git add README.md
 git commit -m "first commit"
 git branch -M main
-git remote add origin https://github.com/Williantagain/MVT1.git
+git remote add origin https://github.com/Williantagain/djangopython.git
 git push -u origin main
 
 
 …or push an existing repository from the command line
-git remote add origin https://github.com/Williantagain/MVT1.git
+git remote add origin https://github.com/Williantagain/djangopython.git
 git branch -M main
 git push -u origin main
 
@@ -52,13 +66,62 @@ git push -u origin main
 
 
 importants:
- quand tu met le mot de passe ça ne prend pas in faut juste suivre les instructions
-pour ma part jai pro un jetton de 7jours je crois
 
-jetons : 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  cest xa qui remplace le mot de passe sinon on ne pourra pas mettre le code en ligne
+
 
 ----------------------------------------------
 =====================================
+
++ 
+
+============================
+------------------------
+https://www.pythonanywhere.com/registration/register/beginner/
+
+username : Djangop
+
+email : presitechcube@gmail.com
+
+mdp : @Techcube_6
+
+$ pip3.8 install --user pythonanywhere
+$ pa_autoconfigure_django.py --python=3.8 https://github.com/<your-github-username>/my-first-blog.git # ici cest $ pa_autoconfigure_django.py --python=3.8 https://github.com/Williantagain/djangopython.git
+
+(theneeds.pythonanywhere.com) 16:41 ~/theneeds.pythonanywhere.com (master)$ python manage.py createsuperuser
+
+Username (leave blank to use 'theneeds'): 
+Email address: resitechcube@gmail.com     # note bien je n'ai pas écrit l'email avec p   
+Password: @TechCube_2
+Password (again): 
+Superuser created successfully.
+(theneeds.pythonanywhere.com) 16:46 ~/theneeds.pythonanywhere.com (master)$ 
+
+   
+
+
+BAS a vérifier : avec un seul email on peut faire plusieurs sites tout ce qu'on a faire cest de changer l'username et le tour est jouer
+
+
+pour le meilleur déploiement bien sécuriser: 
+https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
+------------------------------------
+===================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -248,3 +311,71 @@ https://openclassrooms.com/fr/dashboard/courses
 mails : williantagain@gmail.com
 mdp : Tagerwill=11
 username : Williantagain
+
+
+
+
+
+****************************************************************
+.gitignore
+----------- 
+# Python
+*.pyc
+*~
+__pycache__
+
+# Env
+.env
+myvenv/
+venv/
+
+# Base de donnée
+db.sqlite3
+
+# Dossier "static" à la racine du projet
+/static/
+
+# macOS
+._*
+.DS_Store
+.fseventsd
+.Spotlight-V100
+
+# Windows
+Thumbs.db*
+ehthumbs*.db
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vscode/
+.history/
+*.code-workspace
+
+Text
+XPath: /pre[2]/code
+*************************************************************
+
+
+
+
+
+
+
+
+
+import requests
+username = 'Djangop'
+token = '9efea6dba2419e9555c23d9b387416f5b2322977'
+
+response = requests.get(
+    'https://www.pythonanywhere.com/api/v0/user/{username}/cpu/'.format(
+        username=username
+    ),
+    headers={'Authorization': 'Token {token}'.format(token=token)}
+)
+if response.status_code == 200:
+    print('CPU quota info:')
+    print(response.content)
+else:
+    print('Got unexpected status code {}: {!r}'.format(response.status_code, response.content)
